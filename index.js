@@ -30,7 +30,15 @@ async function getOverlayLinks() {
                 productArr.push(await e.getAttribute("href"));
                 //console.log(await e.getAttribute("href"))
             }
+        for(let e of productArr){
+                await driver.get(e);
+                let coaLink = await driver.findElement(By.className('coa-link')).getAttribute("href")
+                //if coa-link is not null do the woik
+                pdfArr.push(coaLink) 
+                console.log(coaLink)
+        
         }
+        console.log(pdfArr)
         finally {
                 await driver.close()
         }
