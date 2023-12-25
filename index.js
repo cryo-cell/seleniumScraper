@@ -3,7 +3,9 @@ let productArr = []
 let pdfArr = []
 async function getOverlayLinks() {
         let driver = await new Builder().forBrowser('chrome').build();
-        try {
+        await driver.manage().setTimeouts({ implicit: 10000 });
+
+        //try {
           await driver.get('https://trulieve.com/');
 
           let remember = await driver.findElement(By.xpath('//*[@id="av_terms_checkbox"]'))
@@ -12,19 +14,11 @@ async function getOverlayLinks() {
           await yes.click()
           let location = await driver.findElement(By.xpath('//*[@id="st-container"]/div/header/div[2]/div/div[5]/a/span'))
           await location.click()
-          await new Promise(resolve => setTimeout(resolve, 15000));
-          let floridaButton = await driver.findElement(By.xpath('//*[@id="amlocator-map-container6588c0d3e7120"]/div[3]/div[3]/div/div[3]/form/button'))
+          let floridaButton = await driver.findElement(By.xpath('//*/button[@value="FL"]'))
           await floridaButton.click()
-        
 
-
-          
-          await new Promise(resolve => setTimeout(resolve, 5000));
-          let largoLink = await driver.findElement(By.xpath('//*[@id="amlocator-map-container6588c0d3e7120"]/div[3]/div[2]/div[2]/div/div[1]/h3/a'))
-          await largoLink.click()      
-          let pickupHere = await driver.findElement(By.xpath('//*[@id="maincontent"]/div[3]/div/div[2]/div/div[1]/div[3]/div[6]/div[1]/a'))
+          //let largoLink = await driver.findElement(By.xpath('//*[@id="amlocator-map-container6588c0d3e7120"]/div[3]/div[2]/div[2]/div/div[1]/h3/a'))
           await pickupHere.click()
-          await new Promise(resolve => setTimeout(resolve, 2000));
           let menu = await driver.findElement(By.xpath('/html/body/div[1]/header/div[2]/div[3]'))
           await menu.click()
           let flowerLink = await driver.findElement(By.xpath('//*[@id="dm"]/li[3]/a'))
